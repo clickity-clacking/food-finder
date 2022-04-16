@@ -30,7 +30,7 @@ var addrInputHandler = function (){
     return geoUrl
 }
 
-var fetchLatLon = function(lat, lon){
+var fetchLatLon = function(){
   var geoUrl = addrInputHandler(); 
   fetch(geoUrl).then(function(response){
     if (response.ok) {
