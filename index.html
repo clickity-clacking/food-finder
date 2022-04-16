@@ -10,10 +10,12 @@
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="./assets/css/style.css" />
     <title>Food-Finder</title>
+    <link rel="icon" href="./assets/images/logo.png" type="image/icon type">
 
 </head>
 
 <body>
+    
     <header class = "container">
         <section class="row">
             <div class="col-12 bg-green">
@@ -47,17 +49,43 @@
             
         </section>
     </header>
-        
+    
+    <!-- nav buttons -->
     <section class="container">
         <div class="row my-3">
             <div class="col-sm-12">
-                <button class="btn btn-dark btn-lg">TAKE THE QUIZ</button>
+                <button class="btn btn-dark btn-lg" data-toggle="modal" data-target="#addr-modal">TAKE THE QUIZ</button>
                 <button class="btn btn-secondary btn-lg">Cuisine Type</button>
                 <button class="btn btn-secondary btn-lg">Price</button>
                 <button class="btn btn-secondary btn-lg">Yelp Reviews</button>
             </div>
         </div>
     </section>
+
+    <!-- modals start -->
+    <div class="modal fade" id="addr-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="modalLable">Address</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <label for="street-name">Street</label>
+                    <input type="text" name="street-name" id="street-input" placeholder="0000 anywhere lane">
+                    <label for="city-name">City</label>
+                    <input type="text" name="city-name" id="city-input" placeholder="metropolis">
+                    <label for="state-name">State</label>
+                    <input type="text" name="state-name" id="state-input" placeholder="LO">
+                    <label for="zip">Postal Code</label>
+                    <input type="text" name="zip" id="zip-input" placeholder="postal code">
+                    <button type="submit" class="btn btn-lg btn-secondary" id="addr-submit">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <section class="container">
         <div class="row mb-5">
@@ -109,8 +137,12 @@
         </div>
     </section>
 
+    
 
-    <script src="./assets/js/api.js"></script>
+        
+    </div>
+
+
     <script src="./assets/js/script.js"></script>
 </body>
 
