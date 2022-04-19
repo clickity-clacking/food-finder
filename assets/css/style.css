@@ -81,15 +81,20 @@ header {
     border-radius:10px;
     box-sizing: border-box;
     text-decoration:none;
-    font-family: 'Open Sans', sans-serif;
-    font-weight:bolder;
+    font-family:'Akshar', sans-serif;
+    font-weight:light;
     color:#fca50e;
     text-align:center;
     transition: all 0.2s;
 }
 
-.button-holder{
+.centered-holder{
     display: flex;
     justify-content: center;
+}
+
+
+.rec{
+    font-family:'Akshar', sans-serif;
 }
 
