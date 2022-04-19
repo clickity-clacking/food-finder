@@ -12,7 +12,7 @@
 }
 
 .welcome-note p {
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-family:'Akshar', sans-serif;
     font-size: large;
     text-align: center;
     font-weight: 600;
@@ -20,12 +20,13 @@
 }
 
 .img-border {
-    border: 5px solid gray;
+    border: 5px solid white;
+    border-radius: 15px;
 }
 
 .bg-green {
     background-color: #698883;
-    border: 1px solid #3f514e;
+    border: 1px solid #fca50e;
     padding-top: 20px;
     padding-bottom: 20px;
     border-radius: 10px;
@@ -33,7 +34,7 @@
 
 .bg-blue {
     background-color: #75b5a9;
-    border: 1px solid #36534d;
+    border: 1px solid #fca50e;
     padding: 20px;
     border-radius: 10px;
 }
@@ -75,14 +76,14 @@ header {
 .btn {
     display:inline;
     padding:1.35em 3.2em;
-    border:0.1em solid #FFFFFF;
-    margin: 2.3em 0.3em 2.3em 0.3em;
+    border:0.1em solid white;
+    margin: 1.5em 0.5em 1.5em 0.5em;
     border-radius:10px;
     box-sizing: border-box;
     text-decoration:none;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-weight:300;
-    color:#FFFFFF;
+    font-family: 'Open Sans', sans-serif;
+    font-weight:bolder;
+    color:#fca50e;
     text-align:center;
     transition: all 0.2s;
 }
