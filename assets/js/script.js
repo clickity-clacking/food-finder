@@ -1,38 +1,37 @@
 //variables
+const addrSubmitBtn = document.getElementById('addr-submit');
 
 
-// User input Street Number and name
-// User input City
-// User input State
-// User input Postal Code
-// User Submit input
+
+
 // JS retrieve input values on submit
-// JS concatenate input
-// JS split concatenated input
-// JS store retrieved val as string array
-// JS string array vals in fetch url
+
+
+
 // Fetch data based on retrieved vals
-// 
 var addrInputHandler = function (){
+    // User input Street Number and name
     var streetVal = '400 north louise street'; //document.getElementById('street-input').value;
+    // JS store retrieved val as string array
     var streetArray = streetVal.split(' ')
-    console.log(streetArray);
+    // join array strings with '+' symbol
     var streetString = streetArray.join('+')
-    console.log(streetString);
+    // get User input City
     var cityString = 'glendale'; //document.getElementById('city-input').value
-    console.log(cityString);
+    // get User input State
     var stateString = 'CA'; //document.getElementById('state-input').value
-    console.log(stateString);
     var zipString = '91206'; //document.getElementById('zip-input').value
-    console.log(zipString);
 
     var geoUrl = "https://nominatim.openstreetmap.org/search.php?street=" + streetString + "&city=" + cityString + "&state=" + stateString + "&postalcode=" + zipString + "&format=jsonv2&limit=1";
     return geoUrl
 }
 
-var fetchLatLon = function(lat, lon){
-  var geoUrl = addrInputHandler(); 
-  fetch(geoUrl).then(function(response){
+
+
+
+var fetchLatLon = function(url){ 
+  // Fetch data based on retrieved vals
+  fetch(url).then(function(response){
     if (response.ok) {
       response.json().then(function(data){
         console.log(data[0].lat);
@@ -45,7 +44,7 @@ var fetchLatLon = function(lat, lon){
   })
 };
 
-fetchLatLon();
+fetchLatLon(addrInputHandler());
 //open to main page containing food selector generator that can function right away
     //function retrieve data from storage if present
 
@@ -75,3 +74,39 @@ fetchLatLon();
         //filter base restaurant array to match criteria from form
 
         //store in local storage
+
+// Rating stars functionality
+jQuery(document).ready(function($) {
+  $('.rating_stars span.r').hover(function() {
+              // get hovered value
+              var rating = $(this).data('rating');
+              var value = $(this).data('value');
+              $(this).parent().attr('class', '').addClass('rating_stars').addClass('rating_'+rating);
+              highlight_star(value);
+          }, function() {
+              // get hidden field value
+              var rating = $("#rating").val();
+              var value = $("#rating_val").val();
+              $(this).parent().attr('class', '').addClass('rating_stars').addClass('rating_'+rating);
+              highlight_star(value);
+          }).click(function() {
+              // Set hidden field value
+              var value = $(this).data('value');
+              $("#rating_val").val(value);
+  
+              var rating = $(this).data('rating');
+              $("#rating").val(rating);
+              
+              highlight_star(value);
+          });
+          
+          var highlight_star = function(rating) {
+              $('.rating_stars span.s').each(function() {
+                  var low = $(this).data('low');
+                  var high = $(this).data('high');
+                  $(this).removeClass('active-high').removeClass('active-low');
+                  if (rating >= high) $(this).addClass('active-high');
+                  else if (rating == low) $(this).addClass('active-low');
+              });
+          }
+  });
