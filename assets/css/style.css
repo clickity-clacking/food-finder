@@ -5,7 +5,7 @@
 }
 
 .welcome-note {
-    background-color: #ced4db;
+    background-color: #fca50e;
     color: #2e353a;
     padding: 40px 40px;
     border-radius: 10px;
@@ -20,7 +20,7 @@
 }
 
 .img-border {
-    border: 5px solid white;
+    border: 5px solid #2e353a;
     border-radius: 15px;
 }
 
@@ -76,7 +76,7 @@ header {
 .btn {
     display:inline;
     padding:1.35em 3.2em;
-    border:0.1em solid white;
+    border:0.1em solid #2e353a;
     margin: 1.5em 0.5em 1.5em 0.5em;
     border-radius:10px;
     box-sizing: border-box;
