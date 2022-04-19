@@ -73,6 +73,22 @@ header {
 }
 
 .btn {
-    margin-right: 10px;
+    display:inline;
+    padding:1.35em 3.2em;
+    border:0.1em solid #FFFFFF;
+    margin: 2.3em 0.3em 2.3em 0.3em;
+    border-radius:10px;
+    box-sizing: border-box;
+    text-decoration:none;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight:300;
+    color:#FFFFFF;
+    text-align:center;
+    transition: all 0.2s;
+}
+
+.button-holder{
+    display: flex;
+    justify-content: center;
 }
 
