@@ -4,15 +4,39 @@
     box-sizing: border-box;
 }
 
+<<<<<<< HEAD
 .welcome-note {
     background-color: #fca50e;
     color: #2e353a;
+=======
+:root {
+    --main-color: #ced4db;
+    --welcome-text: #2e353a;
+    --image-border: gray;
+    --main-green: #698883;
+    --main-green-border: #3f514e;
+    --content-box: #75b5a9;
+    --content-border: #36534d;
+    --text-background-1: rgb(168, 206, 168);
+    --text-background-2: rgb(226, 182, 100);
+    --text-background-3: rgb(230, 159, 159);
+}
+
+.welcome-note {
+    background-color: var(--text-background-1);
+    background-image: linear-gradient(45deg, var(--text-background-1) 0%, var(--text-background-2) 52%, var(--text-background-3) 90%);
+    color: var(--welcome-text);
+>>>>>>> 344207fe765a89f326c985a554d7e3ef66c6a35e
     padding: 40px 40px;
     border-radius: 10px;
 }
 
 .welcome-note p {
+<<<<<<< HEAD
     font-family:'Akshar', sans-serif;
+=======
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+>>>>>>> 344207fe765a89f326c985a554d7e3ef66c6a35e
     font-size: large;
     text-align: center;
     font-weight: 600;
@@ -20,6 +44,7 @@
 }
 
 .img-border {
+<<<<<<< HEAD
     border: 5px solid #2e353a;
     border-radius: 15px;
 }
@@ -27,14 +52,27 @@
 .bg-green {
     background-color: #698883;
     border: 1px solid #fca50e;
+=======
+    border: 5px solid var(--image-border);
+}
+
+.bg-green {
+    background-color: Var(--main-green);
+    border: 1px solid var(--main-green-border);
+>>>>>>> 344207fe765a89f326c985a554d7e3ef66c6a35e
     padding-top: 20px;
     padding-bottom: 20px;
     border-radius: 10px;
 }
 
 .bg-blue {
+<<<<<<< HEAD
     background-color: #75b5a9;
     border: 1px solid #fca50e;
+=======
+    background-color: var(--content-box);
+    border: 1px solid var(--content-border);
+>>>>>>> 344207fe765a89f326c985a554d7e3ef66c6a35e
     padding: 20px;
     border-radius: 10px;
 }
@@ -73,6 +111,7 @@ header {
     width: 50px;
 }
 
+<<<<<<< HEAD
 .btn {
     display:inline;
     padding:1.35em 3.2em;
@@ -84,10 +123,27 @@ header {
     font-family:'Akshar', sans-serif;
     font-weight:light;
     color:#fca50e;
+=======
+
+.btn {
+    margin-right: 0px;
+    align-self: center;
+    margin:75px 0 0 0;
+    padding: 20px 0;
+    display:inline-block;
+    border:0.1em solid #FFFFFF;
+    border-radius:0.12em;
+    box-sizing: border-box;
+    text-decoration:none;
+    font-family:'Roboto',sans-serif;
+    font-weight:300;    
+    color:#FFFFFF;
+>>>>>>> 344207fe765a89f326c985a554d7e3ef66c6a35e
     text-align:center;
     transition: all 0.2s;
 }
 
+<<<<<<< HEAD
 .centered-holder{
     display: flex;
     justify-content: center;
@@ -98,3 +154,64 @@ header {
     font-family:'Akshar', sans-serif;
 }
 
+=======
+.btn-dark {
+    background-color: var(--main-green);
+    background-image: linear-gradient(45deg, var(--main-green) 10%, var(--main-green-border) 60%);
+    transition: all .5s ease-out;
+}
+
+.btn-secondary {
+     background-color: var(--main-green);
+     background-image: linear-gradient(45deg, var(--main-green) 0%, var(--content-box) 52%);
+     transition: all .5s ease-out;
+
+}
+
+.rating_stars {
+    margin-top: 15px;
+    display: inline-block;
+    font-size: 20px;
+    font-weight: 200;
+    color: #918f8f;
+    position: relative;
+}
+
+.rating_stars span .fa, .rating_stars span.active-low .fa-star-o, .rating_stars span.active-high .fa-star-o{
+	display: none;
+}
+
+.rating_stars span .fa-star-o{
+	display: inline-block;
+}
+
+.rating_stars span.s.active-high .fa-star{
+	display: inline-block; color: #feb645;
+}
+
+.rating_stars span.s.active-low .fa-star-half-o{
+	display: inline-block; color: #feb645;
+}
+
+.rating_stars span.r {
+	position: absolute;
+	top: 5px;
+	height: 20px;
+	width: 10px;
+	left: 0;
+}
+
+.rating_stars span.r.r0_5 {left:13px;}
+.rating_stars span.r.r1 {left:23px; width: 11px;}
+.rating_stars span.r.r1_5 {left:39px; width: 13px;}
+.rating_stars span.r.r2 {left:50px; width: 12px;}
+.rating_stars span.r.r2_5 {left:68px; width: 12px;}
+.rating_stars span.r.r3 {left:79px; width: 11px;}
+.rating_stars span.r.r3_5 {left:95px; width: 12px;}
+.rating_stars span.r.r4 {left: 107px;; width: 12px;}
+.rating_stars span.r.r4_5 {left:123px; width: 12px;}
+.rating_stars span.r.r5 {left:135px; width: 12px;}
+
+
+
+>>>>>>> 344207fe765a89f326c985a554d7e3ef66c6a35e
