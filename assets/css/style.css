@@ -12,10 +12,14 @@
     --main-green-border: #3f514e;
     --content-box: #75b5a9;
     --content-border: #36534d;
+    --text-background-1: rgb(168, 206, 168);
+    --text-background-2: rgb(226, 182, 100);
+    --text-background-3: rgb(230, 159, 159);
 }
 
 .welcome-note {
-    background-color: var(--main-color);
+    background-color: var(--text-background-1);
+    background-image: linear-gradient(45deg, var(--text-background-1) 0%, var(--text-background-2) 52%, var(--text-background-3) 90%);
     color: var(--welcome-text);
     padding: 40px 40px;
     border-radius: 10px;
@@ -98,6 +102,19 @@ header {
     color:#FFFFFF;
     text-align:center;
     transition: all 0.2s;
+}
+
+.btn-dark {
+    background-color: var(--main-green);
+    background-image: linear-gradient(45deg, var(--main-green) 10%, var(--main-green-border) 60%);
+    transition: all .5s ease-out;
+}
+
+.btn-secondary {
+     background-color: var(--main-green);
+     background-image: linear-gradient(45deg, var(--main-green) 0%, var(--content-box) 52%);
+     transition: all .5s ease-out;
+
 }
 
 .rating_stars {
