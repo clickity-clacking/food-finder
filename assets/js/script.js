@@ -1,50 +1,96 @@
 //variables
 const addrSubmitBtn = document.getElementById('addr-submit');
-
-
-
-
+const foodEl = document.getElementById('cuisine')
+var foodSel = foodEl.options[foodEl.selectedIndex].value
+const priceEl = document.getElementById('price')
+var priceSel = priceEl.options[priceEl.selectedIndex].value
+var imgArr = []
 // JS retrieve input values on submit
 
 
 
 // Fetch data based on retrieved vals
-var addrInputHandler = function (){
+var formHandler = function (){
     // User input Street Number and name
     var streetVal = '400 north louise street'; //document.getElementById('street-input').value;
     // JS store retrieved val as string array
-    var streetArray = streetVal.split(' ')
+    var streetArr = streetVal.split(' ')
     // join array strings with '+' symbol
-    var streetString = streetArray.join('+')
+    var streetString = streetArr.join('+')
     // get User input City
-    var cityString = 'glendale'; //document.getElementById('city-input').value
+    var cityVal = 'glendale'; //document.getElementById('city-input').value
+    var cityArr = cityVal.split(' ')
+    var cityString = cityArr.join('+')
     // get User input State
     var stateString = 'CA'; //document.getElementById('state-input').value
     var zipString = '91206'; //document.getElementById('zip-input').value
 
     var geoUrl = "https://nominatim.openstreetmap.org/search.php?street=" + streetString + "&city=" + cityString + "&state=" + stateString + "&postalcode=" + zipString + "&format=jsonv2&limit=1";
-    return geoUrl
+    // Fetch data based on retrieved vals
+    fetch(geoUrl).then(function(response){
+      if (response.ok) {
+        response.json().then(function(geoData){
+          console.log(geoData)
+        })
+      }
+      else {
+        console.log('selection invalid')
+      }
+    })
+};
+
+ 
+
+foodEl.onchange = function() {
+  foodSel = foodEl.options[foodEl.selectedIndex].value;
+  console.log(foodSel);
+  getFood(foodSel)
+};
+
+priceEl.onchange = function() {
+  priceSel = priceEl.options[priceEl.selectedIndex].value;
+  console.log(priceSel);
+  return priceSel;
+};
+var getFood = function(food){
+  let foodURL = 'https://foodish-api.herokuapp.com/api/images/' + food
+  for (var i = 0; i < 3; i++) {
+    fetch(foodURL).then(function(response){
+      if (response.ok) {
+        response.json().then(function(img){
+          imgArr.push(img.image);
+        })
+      }
+      else {
+        console.log('selection invalid');
+      }
+    })
+  }
+  console.log(imgArr)
+}
+
+var setFood = function () {
+  const resultsEl = document.querySelectorAll('.comments');           
+  for (var i = 0; i < resultsEl.length; i++) {
+    let imageContainer = document.createElement ('img');
+    imageContainer.setAttribute('src', imgArr[i]);
+    imageContainer.setAttribute('class', 'food-img');
+    imageContainer.setAttribute('height', '100px')
+    let textEl = document.createElement('span')
+    textEl.setAttribute('class', 'result-text')
+    textEl.textContent = priceSel
+    resultsEl[i].appendChild(imageContainer);
+    resultsEl[i].appendChild(textEl);
+  }
 }
 
 
 
 
-var fetchLatLon = function(url){ 
-  // Fetch data based on retrieved vals
-  fetch(url).then(function(response){
-    if (response.ok) {
-      response.json().then(function(data){
-        console.log(data[0].lat);
-        console.log(data[0].lon);
-      })
-    }
-    else {
-      console.log('selection invalid')
-    }
-  })
-};
 
-fetchLatLon(addrInputHandler());
+
+
+addrSubmitBtn.addEventListener('click', () => setFood());
 //open to main page containing food selector generator that can function right away
     //function retrieve data from storage if present
 
