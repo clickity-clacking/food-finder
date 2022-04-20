@@ -82,8 +82,22 @@ header {
     width: 50px;
 }
 
+
 .btn {
-    margin-right: 10px;
+    margin-right: 0px;
+    align-self: center;
+    margin:75px 0 0 0;
+    padding: 20px 0;
+    display:inline-block;
+    border:0.1em solid #FFFFFF;
+    border-radius:0.12em;
+    box-sizing: border-box;
+    text-decoration:none;
+    font-family:'Roboto',sans-serif;
+    font-weight:300;    
+    color:#FFFFFF;
+    text-align:center;
+    transition: all 0.2s;
 }
 
 .rating_stars {
@@ -129,4 +143,6 @@ header {
 .rating_stars span.r.r4 {left: 107px;; width: 12px;}
 .rating_stars span.r.r4_5 {left:123px; width: 12px;}
 .rating_stars span.r.r5 {left:135px; width: 12px;}
+
+
 
