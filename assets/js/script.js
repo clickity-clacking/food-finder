@@ -1,51 +1,96 @@
 //variables
-
-
-// User input Street Number and name
-// User input City
-// User input State
-// User input Postal Code
-// User Submit input
+const addrSubmitBtn = document.getElementById('addr-submit');
+const foodEl = document.getElementById('cuisine')
+var foodSel = foodEl.options[foodEl.selectedIndex].value
+const priceEl = document.getElementById('price')
+var priceSel = priceEl.options[priceEl.selectedIndex].value
+var imgArr = []
 // JS retrieve input values on submit
-// JS concatenate input
-// JS split concatenated input
-// JS store retrieved val as string array
-// JS string array vals in fetch url
+
+
+
 // Fetch data based on retrieved vals
-// 
-var addrInputHandler = function (){
+var formHandler = function (){
+    // User input Street Number and name
     var streetVal = '400 north louise street'; //document.getElementById('street-input').value;
-    var streetArray = streetVal.split(' ')
-    console.log(streetArray);
-    var streetString = streetArray.join('+')
-    console.log(streetString);
-    var cityString = 'glendale'; //document.getElementById('city-input').value
-    console.log(cityString);
+    // JS store retrieved val as string array
+    var streetArr = streetVal.split(' ')
+    // join array strings with '+' symbol
+    var streetString = streetArr.join('+')
+    // get User input City
+    var cityVal = 'glendale'; //document.getElementById('city-input').value
+    var cityArr = cityVal.split(' ')
+    var cityString = cityArr.join('+')
+    // get User input State
     var stateString = 'CA'; //document.getElementById('state-input').value
-    console.log(stateString);
     var zipString = '91206'; //document.getElementById('zip-input').value
-    console.log(zipString);
 
     var geoUrl = "https://nominatim.openstreetmap.org/search.php?street=" + streetString + "&city=" + cityString + "&state=" + stateString + "&postalcode=" + zipString + "&format=jsonv2&limit=1";
-    return geoUrl
-}
-
-var fetchLatLon = function(lat, lon){
-  var geoUrl = addrInputHandler(); 
-  fetch(geoUrl).then(function(response){
-    if (response.ok) {
-      response.json().then(function(data){
-        console.log(data[0].lat);
-        console.log(data[0].lon);
-      })
-    }
-    else {
-      console.log('selection invalid')
-    }
-  })
+    // Fetch data based on retrieved vals
+    fetch(geoUrl).then(function(response){
+      if (response.ok) {
+        response.json().then(function(geoData){
+          console.log(geoData)
+        })
+      }
+      else {
+        console.log('selection invalid')
+      }
+    })
 };
 
-fetchLatLon();
+ 
+
+foodEl.onchange = function() {
+  foodSel = foodEl.options[foodEl.selectedIndex].value;
+  console.log(foodSel);
+  getFood(foodSel)
+};
+
+priceEl.onchange = function() {
+  priceSel = priceEl.options[priceEl.selectedIndex].value;
+  console.log(priceSel);
+  return priceSel;
+};
+var getFood = function(food){
+  let foodURL = 'https://foodish-api.herokuapp.com/api/images/' + food
+  for (var i = 0; i < 3; i++) {
+    fetch(foodURL).then(function(response){
+      if (response.ok) {
+        response.json().then(function(img){
+          imgArr.push(img.image);
+        })
+      }
+      else {
+        console.log('selection invalid');
+      }
+    })
+  }
+  console.log(imgArr)
+}
+
+var setFood = function () {
+  const resultsEl = document.querySelectorAll('.comments');           
+  for (var i = 0; i < resultsEl.length; i++) {
+    let imageContainer = document.createElement ('img');
+    imageContainer.setAttribute('src', imgArr[i]);
+    imageContainer.setAttribute('class', 'food-img');
+    imageContainer.setAttribute('height', '100px')
+    let textEl = document.createElement('span')
+    textEl.setAttribute('class', 'result-text')
+    textEl.textContent = priceSel
+    resultsEl[i].appendChild(imageContainer);
+    resultsEl[i].appendChild(textEl);
+  }
+}
+
+
+
+
+
+
+
+addrSubmitBtn.addEventListener('click', () => setFood());
 //open to main page containing food selector generator that can function right away
     //function retrieve data from storage if present
 
@@ -75,3 +120,39 @@ fetchLatLon();
         //filter base restaurant array to match criteria from form
 
         //store in local storage
+
+// Rating stars functionality
+jQuery(document).ready(function($) {
+  $('.rating_stars span.r').hover(function() {
+              // get hovered value
+              var rating = $(this).data('rating');
+              var value = $(this).data('value');
+              $(this).parent().attr('class', '').addClass('rating_stars').addClass('rating_'+rating);
+              highlight_star(value);
+          }, function() {
+              // get hidden field value
+              var rating = $("#rating").val();
+              var value = $("#rating_val").val();
+              $(this).parent().attr('class', '').addClass('rating_stars').addClass('rating_'+rating);
+              highlight_star(value);
+          }).click(function() {
+              // Set hidden field value
+              var value = $(this).data('value');
+              $("#rating_val").val(value);
+  
+              var rating = $(this).data('rating');
+              $("#rating").val(rating);
+              
+              highlight_star(value);
+          });
+          
+          var highlight_star = function(rating) {
+              $('.rating_stars span.s').each(function() {
+                  var low = $(this).data('low');
+                  var high = $(this).data('high');
+                  $(this).removeClass('active-high').removeClass('active-low');
+                  if (rating >= high) $(this).addClass('active-high');
+                  else if (rating == low) $(this).addClass('active-low');
+              });
+          }
+  });
