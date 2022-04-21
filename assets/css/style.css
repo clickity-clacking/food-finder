@@ -147,3 +147,13 @@ header {
 .rating_stars span.r.r4_5 {left:123px; width: 12px;}
 .rating_stars span.r.r5 {left:135px; width: 12px;}
 
+.food-img {
+     display: block;
+     margin-left: 300px;
+     height: 120px;
+     width: 160px;
+    display:flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center; 
+}
