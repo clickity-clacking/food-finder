@@ -1,13 +1,16 @@
 //variables
 const addrSubmitBtn = document.getElementById('addr-submit');
-const foodEl = document.getElementById('cuisine')
-var foodSel = foodEl.options[foodEl.selectedIndex].value
-const priceEl = document.getElementById('price')
-var priceSel = priceEl.options[priceEl.selectedIndex].value
-var imgArr = []
+const foodEl = document.getElementById('cuisine');
+var foodSel = foodEl.options[foodEl.selectedIndex].value;
+const priceEl = document.getElementById('price');
+var priceSel = priceEl.options[priceEl.selectedIndex].text;
+var imgArr = [];
 // JS retrieve input values on submit
 
 
+var yelpData = function (preferences) {
+    
+}
 
 // Fetch data based on retrieved vals
 var formHandler = function (){
@@ -30,7 +33,13 @@ var formHandler = function (){
     fetch(geoUrl).then(function(response){
       if (response.ok) {
         response.json().then(function(geoData){
-          console.log(geoData)
+          var preferences = {
+            lat: geoData.lat,
+            lon: geoData.lon,
+            price: priceSel,
+
+          }
+          c
         })
       }
       else {
@@ -123,6 +132,7 @@ addrSubmitBtn.addEventListener('click', () => setFood());
 
 // Rating stars functionality
 jQuery(document).ready(function($) {
+
   $('.rating_stars span.r').hover(function() {
               // get hovered value
               var rating = $(this).data('rating');
