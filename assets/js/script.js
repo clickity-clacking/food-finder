@@ -1,33 +1,63 @@
 //variables
 const addrSubmitBtn = document.getElementById('addr-submit');
-const foodEl = document.getElementById('cuisine');
-var foodSel = foodEl.options[foodEl.selectedIndex].value;
-const priceEl = document.getElementById('price');
-var priceSel = priceEl.options[priceEl.selectedIndex].text;
+// var foodSel = foodEl.options[foodEl.selectedIndex].value;
+// console.log(foodSel)
+// const priceEl = document.getElementById('price');
+// var priceSel = priceEl.options[priceEl.selectedIndex].value;
+// console.log (priceSel)
+
+
 var imgArr = [];
-// JS retrieve input values on submit
+
 
 
 var yelpData = function (preferences) {
-    
+    var yelpUrl = "https://api.yelp.com/v3/businesses/search?latitude=" + preferences.lat + "&longitude=" + preferences.lon + "&price=" + preferences.price + "&categories=" + preferences.cuisine + "&radius=" + preferences.distance + "&opennow=true&sort_by=distance&limit=10";
+    let myHeaders = new Headers();
+    myHeaders.append("Access-Control-Allow-Origin", "*");
+    fetch(yelpUrl, {headers:myHeaders}).then(function(response){
+      if (response.ok) {
+        response.json().then(function(yelpData){
+          console.log(yelpData)
+        })
+      }
+      else {
+        console.log('selection invalid')
+      }
+    })
 }
 
 // Fetch data based on retrieved vals
 var formHandler = function (){
-    // User input Street Number and name
-    var streetVal = '400 north louise street'; //document.getElementById('street-input').value;
-    // JS store retrieved val as string array
-    var streetArr = streetVal.split(' ')
-    // join array strings with '+' symbol
-    var streetString = streetArr.join('+')
+    // get user input Street Number and name
+    var streetVal = document.getElementById('street-input').value;
+    var streetArr = streetVal.split(' ');
+    var streetString = streetArr.join('+');
+    console.log(streetString);
     // get User input City
-    var cityVal = 'glendale'; //document.getElementById('city-input').value
-    var cityArr = cityVal.split(' ')
-    var cityString = cityArr.join('+')
+    var cityVal = document.getElementById('city-input').value;
+    var cityArr = cityVal.split(' ');
+    var cityString = cityArr.join('+');
     // get User input State
-    var stateString = 'CA'; //document.getElementById('state-input').value
-    var zipString = '91206'; //document.getElementById('zip-input').value
-
+    var stateVal = document.getElementById('state-input').value;
+    var stateArr = stateVal.split(' ');
+    var stateString = stateArr.join('+');
+    console.log(stateString);
+    // get user input zip
+    var zipString = document.getElementById('zip-input').value;
+    console.log(zipString);
+    // food type selection
+    const foodEl = document.getElementById('cuisine');
+    var foodSel = foodEl.options[foodEl.selectedIndex].value;
+    console.log(foodSel);
+    // price selection
+    const priceEl = document.getElementById('price');
+    var priceSel = priceEl.options[priceEl.selectedIndex].value;
+    // distance selection
+    const distanceEl = document.getElementById('distance');
+    var distanceSel = distanceEl.options[distanceEl.selectedIndex].value;
+    console.log (priceSel)
+    console.log (distanceSel)
     var geoUrl = "https://nominatim.openstreetmap.org/search.php?street=" + streetString + "&city=" + cityString + "&state=" + stateString + "&postalcode=" + zipString + "&format=jsonv2&limit=1";
     // Fetch data based on retrieved vals
     fetch(geoUrl).then(function(response){
@@ -37,9 +67,10 @@ var formHandler = function (){
             lat: geoData.lat,
             lon: geoData.lon,
             price: priceSel,
-
+            cuisine: foodSel,
+            distance: distanceSel,
           }
-          c
+          yelpData(preferences);
         })
       }
       else {
@@ -50,17 +81,17 @@ var formHandler = function (){
 
  
 
-foodEl.onchange = function() {
-  foodSel = foodEl.options[foodEl.selectedIndex].value;
-  console.log(foodSel);
-  getFood(foodSel)
-};
+// foodEl.onchange = function() {
+//   foodSel = foodEl.options[foodEl.selectedIndex].value;
+//   console.log(foodSel);
+//   getFood(foodSel)
+// };
 
-priceEl.onchange = function() {
-  priceSel = priceEl.options[priceEl.selectedIndex].value;
-  console.log(priceSel);
-  return priceSel;
-};
+// priceEl.onchange = function() {
+//   priceSel = priceEl.options[priceEl.selectedIndex].value;
+//   console.log(priceSel);
+//   return priceSel;
+// };
 var getFood = function(food){
   let foodURL = 'https://foodish-api.herokuapp.com/api/images/' + food
   for (var i = 0; i < 3; i++) {
@@ -99,7 +130,7 @@ var setFood = function () {
 
 
 
-addrSubmitBtn.addEventListener('click', () => setFood());
+addrSubmitBtn.addEventListener('click', () => formHandler());
 //open to main page containing food selector generator that can function right away
     //function retrieve data from storage if present
 
