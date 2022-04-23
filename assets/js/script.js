@@ -1,36 +1,71 @@
-//variables
 const addrSubmitBtn = document.getElementById('addr-submit');
-const foodEl = document.getElementById('cuisine')
-var foodSel = foodEl.options[foodEl.selectedIndex].value
-const priceEl = document.getElementById('price')
-var priceSel = priceEl.options[priceEl.selectedIndex].value
-var imgArr = []
-// JS retrieve input values on submit
 
 
+
+var imgArr = [];
+
+
+// start yelp data set to memory
+var yelpData = function (preferences) {
+    var yelpUrl = "https://api.yelp.com/v3/businesses/search?latitude=" + preferences.lat + "&longitude=" + preferences.lon + "&price=" + preferences.price + "&categories=" + preferences.cuisine + "&radius=" + preferences.distance + "&opennow=true&sort_by=distance&limit=10";
+    let myHeaders = new Headers();
+    myHeaders.append("Access-Control-Allow-Origin", "*");
+    fetch(yelpUrl, {headers:myHeaders}).then(function(response){
+      if (response.ok) {
+        response.json().then(function(yelpData){
+          console.log(yelpData)
+        })
+      }
+      else {
+        console.log('selection invalid')
+      }
+    })
+}
 
 // Fetch data based on retrieved vals
 var formHandler = function (){
-    // User input Street Number and name
-    var streetVal = '400 north louise street'; //document.getElementById('street-input').value;
-    // JS store retrieved val as string array
-    var streetArr = streetVal.split(' ')
-    // join array strings with '+' symbol
-    var streetString = streetArr.join('+')
+    // get user input Street Number and name
+    var streetVal = document.getElementById('street-input').value;
+    var streetArr = streetVal.split(' ');
+    var streetString = streetArr.join('+');
+    console.log(streetString);
     // get User input City
-    var cityVal = 'glendale'; //document.getElementById('city-input').value
-    var cityArr = cityVal.split(' ')
-    var cityString = cityArr.join('+')
+    var cityVal = document.getElementById('city-input').value;
+    var cityArr = cityVal.split(' ');
+    var cityString = cityArr.join('+');
     // get User input State
-    var stateString = 'CA'; //document.getElementById('state-input').value
-    var zipString = '91206'; //document.getElementById('zip-input').value
-
+    var stateVal = document.getElementById('state-input').value;
+    var stateArr = stateVal.split(' ');
+    var stateString = stateArr.join('+');
+    console.log(stateString);
+    // get user input zip
+    var zipString = document.getElementById('zip-input').value;
+    console.log(zipString);
+    // food type selection
+    const foodEl = document.getElementById('cuisine');
+    var foodSel = foodEl.options[foodEl.selectedIndex].value;
+    console.log(foodSel);
+    // price selection
+    const priceEl = document.getElementById('price');
+    var priceSel = priceEl.options[priceEl.selectedIndex].value;
+    // distance selection
+    const distanceEl = document.getElementById('distance');
+    var distanceSel = distanceEl.options[distanceEl.selectedIndex].value;
+    console.log (priceSel)
+    console.log (distanceSel)
     var geoUrl = "https://nominatim.openstreetmap.org/search.php?street=" + streetString + "&city=" + cityString + "&state=" + stateString + "&postalcode=" + zipString + "&format=jsonv2&limit=1";
     // Fetch data based on retrieved vals
     fetch(geoUrl).then(function(response){
       if (response.ok) {
         response.json().then(function(geoData){
-          console.log(geoData)
+          var preferences = {
+            lat: geoData.lat,
+            lon: geoData.lon,
+            price: priceSel,
+            cuisine: foodSel,
+            distance: distanceSel,
+          }
+          yelpData(preferences);
         })
       }
       else {
@@ -39,20 +74,13 @@ var formHandler = function (){
     })
 };
 
- 
+ var setYelpData = function(results) {
 
-foodEl.onchange = function() {
-  foodSel = foodEl.options[foodEl.selectedIndex].value;
-  console.log(foodSel);
-  getFood(foodSel)
-};
+ }
 
-priceEl.onchange = function() {
-  priceSel = priceEl.options[priceEl.selectedIndex].value;
-  console.log(priceSel);
-  return priceSel;
-};
-var getFood = function(food){
+
+// start temp image push
+var getTempFoodImages = function(food){
   let foodURL = 'https://foodish-api.herokuapp.com/api/images/' + food
   for (var i = 0; i < 3; i++) {
     fetch(foodURL).then(function(response){
@@ -66,11 +94,28 @@ var getFood = function(food){
       }
     })
   }
-  console.log(imgArr)
 }
 
-var setFood = function () {
-  const resultsEl = document.querySelectorAll('.comments');           
+
+const foodEl = document.getElementById('cuisine');
+let foodSel = foodEl.options[foodEl.selectedIndex].value;
+foodEl.onchange = function () {
+  foodSel = foodEl.options[foodEl.selectedIndex].value;
+  getTempFoodImages(foodSel)
+  return foodSel
+}
+
+var setTempResults = function () {
+  const priceEl = document.getElementById('price');
+  let priceSel = priceEl.options[priceEl.selectedIndex].text;
+  let ratingSel = document.getElementById('rating').value;
+  console.log(ratingSel);
+  parseInt(ratingSel);
+  console.log(ratingSel);
+  const distanceEl = document.getElementById('distance');
+  var distanceSel = distanceEl.options[distanceEl.selectedIndex].text;
+  const resultsEl = document.querySelectorAll('.comments');
+           
   for (var i = 0; i < resultsEl.length; i++) {
     let imageContainer = document.createElement ('img');
     imageContainer.setAttribute('src', imgArr[i]);
@@ -78,51 +123,62 @@ var setFood = function () {
     imageContainer.setAttribute('height', '100px')
     let textEl = document.createElement('span')
     textEl.setAttribute('class', 'result-text')
-    textEl.textContent = priceSel
+    textEl.textContent = foodSel + " " + priceSel + " within" +  distanceSel;
+    let ratingContainer = document.createElement('div')
+    let ratingEl = document.createElement('img')
+    
+    if (ratingSel == 1) {
+      ratingEl.setAttribute('src', './assets/Images/regular_1.png')
+      ratingEl.classList.add('rating-result')
+    }
+    else if (ratingSel == 15) {
+      ratingEl.setAttribute('src', './assets/Images/regular_1_half.png')
+      ratingEl.classList.add('rating-result')
+    }
+    else if (ratingSel == 2) {
+      ratingEl.setAttribute('src', './assets/Images/regular_2.png')
+      ratingEl.classList.add('rating-result')
+    }
+    else if (ratingSel == 25) {
+      ratingEl.setAttribute('src', './assets/Images/regular_2_half.png')
+      ratingEl.classList.add('rating-result')
+    }
+    else if (ratingSel == 3) {
+      ratingEl.setAttribute('src', './assets/Images/regular_3.png')
+      ratingEl.classList.add('rating-result')
+    }
+    else if (ratingSel == 35) {
+      ratingEl.setAttribute('src', './assets/Images/regular_3_half.png')
+      ratingEl.classList.add('rating-result')
+    }
+    else if (ratingSel == 4) {
+      ratingEl.setAttribute('src', './assets/Images/regular_4.png')
+      ratingEl.classList.add('rating-result')
+    }
+    else if (ratingSel == 45) {
+      ratingEl.setAttribute('src', './assets/Images/regular_4_half.png')
+      ratingEl.classList.add('rating-result')
+    }
+    else if (ratingSel == 5) {
+      ratingEl.setAttribute('src', './assets/Images/regular_5.png')
+      ratingEl.classList.add('rating-result')
+    }
+    ratingContainer.appendChild(ratingEl)
     resultsEl[i].appendChild(imageContainer);
     resultsEl[i].appendChild(textEl);
+    resultsEl[i].appendChild(ratingContainer);
+
+
   }
+
 }
 
-
-
-
-
-
-
-addrSubmitBtn.addEventListener('click', () => setFood());
-//open to main page containing food selector generator that can function right away
-    //function retrieve data from storage if present
-
-    //event listener for button press to provide food option
-
-        //if food option clicked
-
-            //function display restaurant info
-        
-        //else 
-
-            //remove first suggestion from restaurant list 
-
-            //reset so they can press button again and get new food option
-//
-
-//an option from the main page takes you to a survey where you can fill out food prefs
-
-    //check list where you can select multiple items to select cuisine types
-
-    //check list where you can select multiple items to select price bracket
-
-    //more preference options to be added based on readily available yelp/food review site API attributes
-
-    //submit button
-
-        //filter base restaurant array to match criteria from form
-
-        //store in local storage
+// event listener for form submission
+addrSubmitBtn.addEventListener('click', () => setTempResults());
 
 // Rating stars functionality
 jQuery(document).ready(function($) {
+
   $('.rating_stars span.r').hover(function() {
               // get hovered value
               var rating = $(this).data('rating');
