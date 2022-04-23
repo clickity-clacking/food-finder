@@ -79,7 +79,9 @@ var formHandler = function (){
     })
 };
 
- 
+ var setYelpData = function(results) {
+
+ }
 
 // foodEl.onchange = function() {
 //   foodSel = foodEl.options[foodEl.selectedIndex].value;
@@ -92,7 +94,7 @@ var formHandler = function (){
 //   console.log(priceSel);
 //   return priceSel;
 // };
-var getFood = function(food){
+var getTempFoodImages = function(food){
   let foodURL = 'https://foodish-api.herokuapp.com/api/images/' + food
   for (var i = 0; i < 3; i++) {
     fetch(foodURL).then(function(response){
@@ -106,11 +108,28 @@ var getFood = function(food){
       }
     })
   }
-  console.log(imgArr)
 }
 
-var setFood = function () {
-  const resultsEl = document.querySelectorAll('.comments');           
+
+const foodEl = document.getElementById('cuisine');
+let foodSel = foodEl.options[foodEl.selectedIndex].value;
+foodEl.onchange = function () {
+  foodSel = foodEl.options[foodEl.selectedIndex].value;
+  getTempFoodImages(foodSel)
+  return foodSel
+}
+
+var setTempResults = function () {
+  const priceEl = document.getElementById('price');
+  let priceSel = priceEl.options[priceEl.selectedIndex].text;
+  let ratingSel = document.getElementById('rating').value;
+  console.log(ratingSel);
+  parseInt(ratingSel);
+  console.log(ratingSel);
+  const distanceEl = document.getElementById('distance');
+  var distanceSel = distanceEl.options[distanceEl.selectedIndex].text;
+  const resultsEl = document.querySelectorAll('.comments');
+           
   for (var i = 0; i < resultsEl.length; i++) {
     let imageContainer = document.createElement ('img');
     imageContainer.setAttribute('src', imgArr[i]);
@@ -118,19 +137,61 @@ var setFood = function () {
     imageContainer.setAttribute('height', '100px')
     let textEl = document.createElement('span')
     textEl.setAttribute('class', 'result-text')
-    textEl.textContent = priceSel
+    textEl.textContent = foodSel + " " + priceSel + " within" +  distanceSel;
+    let ratingContainer = document.createElement('div')
+    let ratingEl = document.createElement('img')
+    
+    if (ratingSel == 1) {
+      ratingEl.setAttribute('src', './assets/Images/regular_1.png')
+      ratingEl.classList.add('rating-result')
+    }
+    else if (ratingSel == 15) {
+      ratingEl.setAttribute('src', './assets/Images/regular_1_half.png')
+      ratingEl.classList.add('rating-result')
+    }
+    else if (ratingSel == 2) {
+      ratingEl.setAttribute('src', './assets/Images/regular_2.png')
+      ratingEl.classList.add('rating-result')
+    }
+    else if (ratingSel == 25) {
+      ratingEl.setAttribute('src', './assets/Images/regular_2_half.png')
+      ratingEl.classList.add('rating-result')
+    }
+    else if (ratingSel == 3) {
+      ratingEl.setAttribute('src', './assets/Images/regular_3.png')
+      ratingEl.classList.add('rating-result')
+    }
+    else if (ratingSel == 35) {
+      ratingEl.setAttribute('src', './assets/Images/regular_3_half.png')
+      ratingEl.classList.add('rating-result')
+    }
+    else if (ratingSel == 4) {
+      ratingEl.setAttribute('src', './assets/Images/regular_4.png')
+      ratingEl.classList.add('rating-result')
+    }
+    else if (ratingSel == 45) {
+      ratingEl.setAttribute('src', './assets/Images/regular_4_half.png')
+      ratingEl.classList.add('rating-result')
+    }
+    else if (ratingSel == 5) {
+      ratingEl.setAttribute('src', './assets/Images/regular_5.png')
+      ratingEl.classList.add('rating-result')
+    }
+    ratingContainer.appendChild(ratingEl)
     resultsEl[i].appendChild(imageContainer);
     resultsEl[i].appendChild(textEl);
+    resultsEl[i].appendChild(ratingContainer);
+
+
   }
+
 }
 
 
 
 
 
-
-
-addrSubmitBtn.addEventListener('click', () => formHandler());
+addrSubmitBtn.addEventListener('click', () => setTempResults());
 //open to main page containing food selector generator that can function right away
     //function retrieve data from storage if present
 
