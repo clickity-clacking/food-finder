@@ -1,16 +1,11 @@
-//variables
 const addrSubmitBtn = document.getElementById('addr-submit');
-// var foodSel = foodEl.options[foodEl.selectedIndex].value;
-// console.log(foodSel)
-// const priceEl = document.getElementById('price');
-// var priceSel = priceEl.options[priceEl.selectedIndex].value;
-// console.log (priceSel)
+
 
 
 var imgArr = [];
 
 
-
+// start yelp data set to memory
 var yelpData = function (preferences) {
     var yelpUrl = "https://api.yelp.com/v3/businesses/search?latitude=" + preferences.lat + "&longitude=" + preferences.lon + "&price=" + preferences.price + "&categories=" + preferences.cuisine + "&radius=" + preferences.distance + "&opennow=true&sort_by=distance&limit=10";
     let myHeaders = new Headers();
@@ -83,17 +78,8 @@ var formHandler = function (){
 
  }
 
-// foodEl.onchange = function() {
-//   foodSel = foodEl.options[foodEl.selectedIndex].value;
-//   console.log(foodSel);
-//   getFood(foodSel)
-// };
 
-// priceEl.onchange = function() {
-//   priceSel = priceEl.options[priceEl.selectedIndex].value;
-//   console.log(priceSel);
-//   return priceSel;
-// };
+// start temp image push
 var getTempFoodImages = function(food){
   let foodURL = 'https://foodish-api.herokuapp.com/api/images/' + food
   for (var i = 0; i < 3; i++) {
@@ -187,40 +173,8 @@ var setTempResults = function () {
 
 }
 
-
-
-
-
+// event listener for form submission
 addrSubmitBtn.addEventListener('click', () => setTempResults());
-//open to main page containing food selector generator that can function right away
-    //function retrieve data from storage if present
-
-    //event listener for button press to provide food option
-
-        //if food option clicked
-
-            //function display restaurant info
-        
-        //else 
-
-            //remove first suggestion from restaurant list 
-
-            //reset so they can press button again and get new food option
-//
-
-//an option from the main page takes you to a survey where you can fill out food prefs
-
-    //check list where you can select multiple items to select cuisine types
-
-    //check list where you can select multiple items to select price bracket
-
-    //more preference options to be added based on readily available yelp/food review site API attributes
-
-    //submit button
-
-        //filter base restaurant array to match criteria from form
-
-        //store in local storage
 
 // Rating stars functionality
 jQuery(document).ready(function($) {
