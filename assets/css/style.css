@@ -161,5 +161,8 @@ header {
 .rating_stars span.r.r4_5 {left:123px; width: 12px;}
 .rating_stars span.r.r5 {left:135px; width: 12px;}
 
+.values {
+    display: none;
+}
 
 
