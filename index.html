@@ -29,9 +29,10 @@
                         <img src="./assets/images/1.jpeg" class="img-fluid img-border" alt="Burger">
                     </div>
         
-                    <div class="col-sm-4">
-                        <img src="./assets/images/2.jpeg" class="img-fluid img-border" alt="Ice Cream">
+                    <div class="col-sm-4" id = "buttonHolder">
+                        <button type="button" class="col-12 btn btn-dark btn-lg" data-toggle="modal" data-target="#addrModal">TAKE THE QUIZ</button>
                     </div>
+
         
                     <div class="col-sm-4">
                         <img src="./assets/images/3.jpeg" class="img-fluid img-border" alt="Pasta">
@@ -45,7 +46,7 @@
                     <div class="col-sm-10 col-8">
                         <div class="welcome-note">
                             <p>
-                                Welcome to Food Finder! Locate your favorite restaurants and unexplored tastes near you! Make sure to take the quiz below so we can find out what you are looking for.
+                                Welcome to Food Finder! Locate your favorite restaurants and unexplored tastes near you! Make sure to take the quiz so we can find out what you are looking for.
                             </p>
                         </div>
                     </div>
@@ -55,17 +56,6 @@
         </section>
     </header>
     
-    <!-- nav buttons -->
-    <section class="container">
-        <div class="row my-3">
-            <div class="col-sm-12">
-                <button type="button" class="btn btn-dark btn-lg" data-toggle="modal" data-target="#addrModal">TAKE THE QUIZ</button>
-                <button class="btn btn-secondary btn-lg">Cuisine Type</button>
-                <button class="btn btn-secondary btn-lg">Price</button>
-                <button class="btn btn-secondary btn-lg">Yelp Reviews</button>
-            </div>
-        </div>
-    </section>
 
     <!-- modals start -->
     <div class="modal fade" id="addrModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
