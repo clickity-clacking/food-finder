@@ -170,13 +170,21 @@ var setTempResults = function (event) {
     resultsEl[i].appendChild(textEl);
     resultsEl[i].appendChild(ratingContainer);
 
-
   }
-
+  var modalState = document.getElementById('quizModal');
+  modalState.setAttribute('aria-hidden', 'true');
+  modalState.setAttribute('style', 'display: none; top: 87px;');
+  var overlayState = document.querySelector('.reveal-overlay');
+  overlayState.setAttribute('style', 'display: none;');
+  var html = document.querySelector('html');
+  html.setAttribute('class', '');
+  
 }
 
+
+
 // event listener for form submission
-addrSubmitBtn.addEventListener('click', () => setTempResults);
+addrSubmitBtn.addEventListener('click',  setTempResults);
 
 // Rating stars functionality
 jQuery(document).ready(function($) {
