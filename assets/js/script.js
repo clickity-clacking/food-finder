@@ -105,7 +105,9 @@ foodEl.onchange = function () {
   return foodSel
 }
 
-var setTempResults = function () {
+var setTempResults = function (event) {
+  event.preventDefault();
+  event.stopPropagation();
   const priceEl = document.getElementById('price');
   let priceSel = priceEl.options[priceEl.selectedIndex].text;
   let ratingSel = document.getElementById('rating').value;
@@ -174,7 +176,7 @@ var setTempResults = function () {
 }
 
 // event listener for form submission
-addrSubmitBtn.addEventListener('click', () => setTempResults());
+addrSubmitBtn.addEventListener('click', () => setTempResults);
 
 // Rating stars functionality
 jQuery(document).ready(function($) {
