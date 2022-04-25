@@ -130,39 +130,39 @@ var setTempResults = function (event) {
     let ratingEl = document.createElement('img')
     
     if (ratingSel == 1) {
-      ratingEl.setAttribute('src', './assets/Images/regular_1.png')
+      ratingEl.setAttribute('src', './assets/images/regular_1.png')
       ratingEl.classList.add('rating-result')
     }
     else if (ratingSel == 15) {
-      ratingEl.setAttribute('src', './assets/Images/regular_1_half.png')
+      ratingEl.setAttribute('src', './assets/images/regular_1_half.png')
       ratingEl.classList.add('rating-result')
     }
     else if (ratingSel == 2) {
-      ratingEl.setAttribute('src', './assets/Images/regular_2.png')
+      ratingEl.setAttribute('src', './assets/images/regular_2.png')
       ratingEl.classList.add('rating-result')
     }
     else if (ratingSel == 25) {
-      ratingEl.setAttribute('src', './assets/Images/regular_2_half.png')
+      ratingEl.setAttribute('src', './assets/images/regular_2_half.png')
       ratingEl.classList.add('rating-result')
     }
     else if (ratingSel == 3) {
-      ratingEl.setAttribute('src', './assets/Images/regular_3.png')
+      ratingEl.setAttribute('src', './assets/images/regular_3.png')
       ratingEl.classList.add('rating-result')
     }
     else if (ratingSel == 35) {
-      ratingEl.setAttribute('src', './assets/Images/regular_3_half.png')
+      ratingEl.setAttribute('src', './assets/images/regular_3_half.png')
       ratingEl.classList.add('rating-result')
     }
     else if (ratingSel == 4) {
-      ratingEl.setAttribute('src', './assets/Images/regular_4.png')
+      ratingEl.setAttribute('src', './assets/images/regular_4.png')
       ratingEl.classList.add('rating-result')
     }
     else if (ratingSel == 45) {
-      ratingEl.setAttribute('src', './assets/Images/regular_4_half.png')
+      ratingEl.setAttribute('src', './assets/images/regular_4_half.png')
       ratingEl.classList.add('rating-result')
     }
     else if (ratingSel == 5) {
-      ratingEl.setAttribute('src', './assets/Images/regular_5.png')
+      ratingEl.setAttribute('src', './assets/images/regular_5.png')
       ratingEl.classList.add('rating-result')
     }
     ratingContainer.appendChild(ratingEl)
