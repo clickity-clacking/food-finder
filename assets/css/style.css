@@ -15,7 +15,7 @@
     --text-background-1: rgb(168, 206, 168);
     --text-background-2: rgb(226, 182, 100);
     --text-background-3: rgb(230, 159, 159);
-    --header-texture: url('../images/food-bg.jpg');
+    --header-texture: url('../Images/food-bg.jpg');
     --box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
     --box-shadow-dark: 0 0 8px rgba(0, 0, 0, 0.8);
     --images-box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5);
